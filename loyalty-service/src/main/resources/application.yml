@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: loyalty-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      # BUG-04: group RIÊNG — khác inventory-group để Fan-out 100%
+      group-id: loyalty-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+app:
+  kafka:
+    order-topic: storex-order-events
